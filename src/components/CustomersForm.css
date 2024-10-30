@@ -28,3 +28,19 @@ button {
 button.me-2 {
     margin-right: 15px;
 }
+
+.FormularioRental{
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-content: center;
+    justify-content: center ;
+    
+}
+
+.containerRental {
+    max-width: 400px;
+    margin: auto;
+}

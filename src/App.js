@@ -3,12 +3,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Movies from "./components/movies";
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
+import RentalsForm from "./components/rentalsForms"
 import NotFound from "./components/notFound";
 import NavBar from "./components/navBar";
 import MovieForm from "./components/movieForm";
 import CustomersForm from "./components/customersForm"
-import LoginForm from "./components/loginForm";
-import RegisterForm from "./components/registerForm";
 import "./App.css";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -31,13 +30,12 @@ function App() {
       <NavBar />
       <main className="container">
         <Routes>
-          <Route path="/register" element={<RegisterForm />} />
-          <Route path="/login" element={<LoginForm />} />
           <Route path="/movies/:id" element={<MovieFormWrapper />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/customers/new" element={<CustomersForm />} />
           <Route path="/rentals" element={<Rentals />} />
+          <Route path="/rentals/new" element={<RentalsForm />} />
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/" element={<Navigate to="/movies" replace />} />
           <Route path="*" element={<Navigate to="/not-found" replace />} />

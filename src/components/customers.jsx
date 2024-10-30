@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import CustomersTable from './customersTable';
-import Pagination from './common/pagination';
 import paginate from '../utils/paginate';
-import { getCustomers } from "../services/fakeCustomersService";
-import { getGenres } from "../services/fakeGenreService";
+import axios from "axios";
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import SearchBox from './common/searchBox';
 
 class Customers extends Component {
     state = {
-        movies: [],
+        customers: [],
         genres: [],
         currentPage: 1,
         pageSize: 4,
@@ -19,23 +17,22 @@ class Customers extends Component {
         sortColumn: { path: 'title', order: 'asc' }
     };
 
-    componentDidMount() {
-        const genres = [{ _id: '', name: 'All Genres' }, ...getGenres()];
-
-        this.setState({ movies: getCustomers(), genres });
+    async componentDidMount() {
+        const { data: customers } = await axios.get("http://localhost:5000/customers/new");
+        this.setState({ customers });
     }
 
     handleDelete = (movie) => {
-        const movies = this.state.movies.filter(m => m._id !== movie._id);
-        this.setState({ movies });
+        const customers = this.state.customers.filter(m => m._id !== movie._id);
+        this.setState({ customers });
     };
 
     handleLike = (movie) => {
-        const movies = [...this.state.movies];
-        const index = movies.indexOf(movie);
-        movies[index] = { ...movies[index] };
-        movies[index].liked = !movies[index].liked;
-        this.setState({ movies });
+        const customers = [...this.state.customers];
+        const index = customers.indexOf(movie);
+        customers[index] = { ...customers[index] };
+        customers[index].liked = !customers[index].liked;
+        this.setState({ customers });
     };
 
     handlePageChange = (page) => {
@@ -61,7 +58,7 @@ class Customers extends Component {
             sortColumn, 
             selectedGenre,
             searchQuery, 
-            movies: allCustomers, 
+            customers: allCustomers, 
         } = this.state;
 
         let filtered = allCustomers;
@@ -74,20 +71,19 @@ class Customers extends Component {
 
         const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
-        const movies = paginate(sorted, currentPage, pageSize);
+        const customers = paginate(sorted, currentPage, pageSize);
 
-        return { totalCount: filtered.length, data: movies };
+        return { totalCount: filtered.length, data: customers };
     };
     
     render() {
-        const { length: count } = this.state.movies;
-        const { pageSize, 
-                currentPage,
+        const { length: count } = this.state.customers;
+        const { 
                 sortColumn,
                 searchQuery
             } = this.state;
         
-        if (count === 0) return <p> There are no movies in the database. </p>;
+        if (count === 0) return <p> There are no customers in the database. </p>;
 
         const { totalCount, data } = this.getPageData();
 
@@ -111,11 +107,7 @@ class Customers extends Component {
                         onDelete={this.handleDelete}
                         onSort={this.handleSort}
                     />
-                    <Pagination 
-                        itemsCount={totalCount} 
-                        pageSize={pageSize}
-                        currentPage={currentPage}
-                        onPageChange={this.handlePageChange} />    
+                        
                 </div>
             </div>
         );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Table from './common/table';
 
+
 class CustomersTable extends Component { 
     columns = [
         { 
@@ -39,8 +40,8 @@ class CustomersTable extends Component {
 
     render() { 
         const { customers, onSort, sortColumn } = this.props;
-
-        return ( 
+        
+        return (
             <Table 
                 columns={this.columns}
                 data={customers}
