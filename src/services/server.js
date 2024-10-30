@@ -1,18 +1,125 @@
-import customers from './fakeCustomersService.js';
 import express from 'express';
 import cors from 'cors';
-//const express = require("express");
+
 const app = express();
 const port = 5000;
-//const cors = require("cors");
 
-//let alunos = [
-  //  {
-    //    "id": 1,
-      //  "nome" : "Miguel",
-       // "cpf" : "123.456.789-10"
-   // }
-// ]
+let rentals = [
+    {
+      _id: "1",
+      name: "João da Silva",
+      cpf: "123.456.789-00",
+      address: {
+        street: "Rua das Flores",
+        number: 123,
+        city: "São Paulo",
+        state: "SP",
+      },
+    },
+    {
+      _id: "2",
+      name: "Maria Oliveira",
+      cpf: "987.654.321-00",
+      address: {
+        street: "Avenida Brasil",
+        number: 456,
+        city: "Rio de Janeiro",
+        state: "RJ",
+      },
+    },
+    {
+      _id: "3",
+      name: "Carlos Souza",
+      cpf: "111.222.333-44",
+      address: {
+        street: "Rua das Palmeiras",
+        number: 789,
+        city: "Belo Horizonte",
+        state: "MG",
+      },
+    },
+    {
+      _id: "4",
+      name: "Ana Costa",
+      cpf: "444.555.666-77",
+      address: {
+        street: "Praça da Liberdade",
+        number: 101,
+        city: "Curitiba",
+        state: "PR",
+      },
+    },
+    {
+      _id: "5",
+      name: "Lucas Mendes",
+      cpf: "222.333.444-55",
+      address: {
+        street: "Rua do Comércio",
+        number: 202,
+        city: "Porto Alegre",
+        state: "RS",
+      },
+    },
+  ];
+
+let customers = [
+    {
+      _id: "1",
+      name: "João da Silva",
+      cpf: "123.456.789-00",
+      address: {
+        street: "Rua das Flores",
+        number: 123,
+        city: "São Paulo",
+        state: "SP",
+      },
+    },
+    {
+      _id: "2",
+      name: "Maria Oliveira",
+      cpf: "987.654.321-00",
+      address: {
+        street: "Avenida Brasil",
+        number: 456,
+        city: "Rio de Janeiro",
+        state: "RJ",
+      },
+    },
+    {
+      _id: "3",
+      name: "Carlos Souza",
+      cpf: "111.222.333-44",
+      address: {
+        street: "Rua das Palmeiras",
+        number: 789,
+        city: "Belo Horizonte",
+        state: "MG",
+      },
+    },
+    {
+      _id: "4",
+      name: "Ana Costa",
+      cpf: "444.555.666-77",
+      address: {
+        street: "Praça da Liberdade",
+        number: 101,
+        city: "Curitiba",
+        state: "PR",
+      },
+    },
+    {
+      _id: "5",
+      name: "Lucas Mendes",
+      cpf: "222.333.444-55",
+      address: {
+        street: "Rua do Comércio",
+        number: 202,
+        city: "Porto Alegre",
+        state: "RS",
+      },
+    },
+  ];
+
 
 app.use(express.json());
 app.use(cors());
@@ -24,50 +131,42 @@ app.get("/", (req, res) => {
     res.send(retorno);
 })
 
-app.get("/about", (req, res) => {
+app.get("/customers", (req, res) => {
     let retorno = {}
     retorno = {"mensagem": "Dentro do About"};
     console.log("Alguém entrou no /about");
     res.send(retorno);
 })
 
-app.post("/customers", (req, res) => {
+app.post("/customers/new", (req, res) => {
     let dados = req.body;
-    console.log("eu sou bonitao", dados);
-    customers.push(customers['customers']);
+    let retorno ={}
+    customers._id = new Date().getTime().toString();
+    customers.push(dados['customers']);
+    console.log(customers);
     retorno = {"mensagem": "Dentro do POST"};
     res.send(retorno);
 })
 
+app.get("/customers/new", (req, res) => {
+    res.send(customers);
+    
+})
 
-app.delete("/alunos", (req, res) => {
+app.post("/rentals/new", (req, res) => {
     let dados = req.body;
-    console.log(dados['id']);
-    id = parseInt(dados['id']);
-    let i = 0;
-    let index = 0;
-
-    for(i=0; i<alunos.length; i++) {
-        if(alunos[i]['id'] === id) {
-            console.log('Achei o elemento');
-            index = i;
-            break;
-        }
-        console.log(alunos[i]['nome']);
-    }
-    console.log(alunos[index]['nome']);
-    const x = alunos.splice(index, 1);
-    console.log(alunos);
-    retorno = {"mensagem": "Dentro do DELETE"};
+    let retorno ={}
+    rentals._id = new Date().getTime().toString();
+    rentals.push(dados['rentals']);
+    console.log(rentals);
+    retorno = {"mensagem": "Dentro do POST"};
     res.send(retorno);
 })
 
-
-app.get("/customers/new", (req, res) => {
-    res.send(customers);
-    console.log(customers)
+app.get("/rentals/new", (req, res) => {
+    res.send(rentals);
+    
 })
-
 
 app.listen(port, () => {
     console.log(`Servidor em execução na porta ${port}`);

@@ -1,4 +1,4 @@
-let customers = [
+let rentals = [
     // {
     //   _id: "1",
     //   name: "João da Silva",
@@ -56,18 +56,18 @@ let customers = [
     },
   ];
 
-export default customers;
+export default rentals;
 
-export function getCustomers() {
-  return customers;
+export function getRentals() {
+  return rentals;
 }
 export function getCustomer(id) {
-    return customers.find((c) => c._id === id);
+    return rentals.find((c) => c._id === id);
   }
   
   // Função para salvar um cliente (criar ou atualizar)
   export function saveCustomer(customer) {
-    let customerInDb = customers.find((c) => c._id === customer._id) || {};
+    let customerInDb = rentals.find((c) => c._id === customer._id) || {};
     
     // Atualiza os campos do cliente
     customerInDb.name = customer.name;
@@ -82,7 +82,7 @@ export function getCustomer(id) {
     // Se o cliente não existir, cria um novo
     if (!customerInDb._id) {
       customerInDb._id = Date.now().toString();
-      customers.push(customerInDb);
+      rentals.push(customerInDb);
     }
   
     return customerInDb;
@@ -90,9 +90,9 @@ export function getCustomer(id) {
   
   // Função para excluir um cliente pelo ID
   export function deleteCustomer(id) {
-    let customerInDb = customers.find((c) => c._id === id);
+    let customerInDb = rentals.find((c) => c._id === id);
     if (customerInDb) {
-      customers.splice(customers.indexOf(customerInDb), 1);
+      rentals.splice(rentals.indexOf(customerInDb), 1);
     }
     return customerInDb;
   }
