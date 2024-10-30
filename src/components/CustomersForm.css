@@ -1,0 +1,30 @@
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #343a40;
+    font-size: 2.5rem;
+}
+
+.Formulario {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.Formulario .form-label {
+    font-weight: bold;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+button.me-2 {
+    margin-right: 15px;
+}
