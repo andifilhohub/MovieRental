@@ -8,7 +8,7 @@ class  RentalsTable extends Component {
         { 
             path: 'customer', 
             label: 'Customer', 
-            content: (rental) => <Link to={`/rentals/${rental._id}`}> {rental._id} </Link>
+            content: (rental) => <Link to={`/rentals/${rental._id}`}> {rental.customer} </Link>
         },
        
         { 
